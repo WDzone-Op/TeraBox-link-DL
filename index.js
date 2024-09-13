@@ -3,7 +3,6 @@
  * Repository: https://github.com/SudoR2spr/
  */
 
-
 const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 const fs = require('fs');
@@ -55,11 +54,16 @@ const checkSubscription = async (userId) => {
     }
 };
 
+// Updated sendStartMessage to include image
 const sendStartMessage = (chatId) => {
-    bot.sendMessage(chatId, `👋 *Welcome to TeraBox Video Player Bot!* 🎉\n\n*Paste your TeraBox link and watch your video instantly—no TeraBox app needed!* 🚀\n\nPlease subscribe to our [Updates Channel](https://t.me/Opleech_WD) to start using this bot.`, {
+    bot.sendPhoto(chatId, 'https://example.com/welcome-image.jpg', { // Replace with your image URL
+        caption: `👋 *Welcome to TeraBox Video Player Bot!* 🎉\n\n*Paste your TeraBox link and watch your video instantly—no TeraBox app needed!* 🚀\n\nPlease subscribe to our [Updates Channel](https://t.me/Opleech_WD) to start using this bot.`,
         parse_mode: 'Markdown',
         reply_markup: {
-            inline_keyboard: [[{ text: '〇 𝐉𝐨𝐢𝐧 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 𝐓𝐨 𝐔𝐬𝐞 𝐌𝐞 〇', url: 'https://t.me/Opleech_WD' }]]
+            inline_keyboard: [
+                [{ text: '〇 𝐉𝐨𝐢𝐧 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 𝐓𝐨 𝐔𝐬𝐞 𝐌𝐞 〇', url: 'https://t.me/Opleech_WD' }],
+                [{ text: 'Join Another Channel', url: 'https://t.me/YourOtherChannel' }] // Add your second channel link here
+            ]
         }
     });
 };
@@ -81,6 +85,7 @@ bot.onText(/\/start/, async (msg) => {
     }
 });
 
+// Other commands and event handlers remain the same...
 bot.onText(/\/stat/, (msg) => {
     const chatId = msg.chat.id;
     try {
@@ -154,7 +159,7 @@ bot.on('message', async (msg) => {
                     userLinks.push({ original: text, download: downloadUrl });
                     saveData();
 
-                    bot.editMessageText(`✅ *Your video is ready!*\n\n📥 *Click the button below to view or download it.*\n\n💡 *Tips:*\n\n• If the video doesn’t start playing immediately, please wait a few moments—it might take some time to load.\n• Ensure you have a stable internet connection for the best experience.`, {
+                    bot.editMessageText(`✅ *Your video is ready!*\n\n📥 *Click the button below to view or download it.*`, {
                         chat_id: chatId,
                         message_id: messageId,
                         reply_markup: {
