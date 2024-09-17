@@ -56,13 +56,13 @@ const checkSubscription = async (userId) => {
 
 // Updated sendStartMessage to include image
 const sendStartMessage = (chatId) => {
-    bot.sendPhoto(chatId, 'https://example.com/welcome-image.jpg', { // Replace with your image URL
+    bot.sendPhoto(chatId, 'https://i.imgur.com/6cUMqLc.jpeg', { // Replace with your image URL
         caption: `👋 *Welcome to TeraBox Video Player Bot!* 🎉\n\n*Paste your TeraBox link and watch your video instantly—no TeraBox app needed!* 🚀\n\nPlease subscribe to our [Updates Channel](https://t.me/Opleech_WD) to start using this bot.`,
         parse_mode: 'Markdown',
         reply_markup: {
             inline_keyboard: [
                 [{ text: '〇 𝐉𝐨𝐢𝐧 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 𝐓𝐨 𝐔𝐬𝐞 𝐌𝐞 〇', url: 'https://t.me/Opleech_WD' }],
-                [{ text: 'Join Another Channel', url: 'https://t.me/YourOtherChannel' }] // Add your second channel link here
+                [{ text: '🔗 How to use Bot 🔗', url: 'https://t.me/WOODcraft_Mirror_Zone/43' }] // Add your second channel link here
             ]
         }
     });
@@ -91,7 +91,16 @@ bot.onText(/\/stat/, (msg) => {
     try {
         const userCount = Object.keys(data).length;
         const linkCount = Object.values(data).reduce((sum, userData) => sum + userData.links.length, 0);
-        bot.sendMessage(chatId, `📊 *Current Bot Stats:*\n\n👥 *Total Users:* ${userCount}\n🔗 *Links Processed:* ${linkCount}`);
+
+        bot.sendPhoto(chatId, 'https://i.imgur.com/H91ehBY.jpeg', {
+            caption: `📊 *Current Bot Stats:*\n\n👥 *Total Users:* ${userCount}\n🔗 *Links Processed:* ${linkCount}`,
+            parse_mode: 'Markdown',
+            reply_markup: {
+                inline_keyboard: [
+                    [{ text: "✨ Dear my friend✨", url: "tg://settings" }]
+                ]
+            }
+        });
     } catch (error) {
         console.error(error);
         bot.sendMessage(chatId, `❌ *An error occurred while retrieving statistics. Please try again later.*`);
