@@ -138,9 +138,16 @@ bot.on('message', async (msg) => {
         }
 
         if (!isTeraboxLink(text)) {
-            bot.sendMessage(chatId, `❌ *That is not a valid TeraBox link.*`);
+            bot.sendMessage(chatId, `❌ *That is not a valid TeraBox link.*`, {
+                reply_markup: {
+                    inline_keyboard: [
+                        [{ text: "✨ Read the message ✨", url: "https://t.me/WOODcraft_Mirror_Zone/44" }]
+                    ]
+                }
+            });
             return;
         }
+
 
         if (!data[chatId]) {
             data[chatId] = { links: [] };
@@ -152,7 +159,7 @@ bot.on('message', async (msg) => {
         if (existingLink) {
             bot.sendMessage(chatId, `✅ *Your video has already been processed.* Click the button below to view or download it.`, {
                 reply_markup: {
-                    inline_keyboard: [[{ text: 'ᢱ Watch/Download ⎙', url: existingLink.download }]]
+                    inline_keyboard: [[{ text: 'ᢱ Watch / Download ⎙', url: existingLink.download }]]
                 }
             });
             return;
@@ -172,7 +179,7 @@ bot.on('message', async (msg) => {
                         chat_id: chatId,
                         message_id: messageId,
                         reply_markup: {
-                            inline_keyboard: [[{ text: 'ᢱ Watch/Download ⎙', url: downloadUrl }]]
+                            inline_keyboard: [[{ text: 'ᢱ Watch / Download ⎙', url: downloadUrl }]]
                         }
                     });
                 })
